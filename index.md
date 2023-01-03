@@ -5,6 +5,7 @@
 
 A lightweight but attractive Linux based OS.
 Built using modern tools and the Go language the apps are entirely created using the [Fyne](https://fyne.io) toolkit.
+Using the [FyneDesk](/desktop/) desktop environment.
 
 ### Get involved
 
