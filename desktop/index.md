@@ -15,12 +15,12 @@ in the centre of how we work. Now you can have the desktop of your dreams
 
 <a href="https://github.com/fyshos/fynedesk/" class="btn btn-default btn-xl">Get Started!</a>
 
-                <h2 class="section-heading">Look and Feel</h2>
-                <hr class="light">
-                <img src="https://github.com/fyshos/fynedesk/raw/develop/desktop-dark-current.png" alt="" />
-				<p class="caption light"><br />The standard theme in its dark look.</p>
-				<p>&nbsp;</p>
-                <img src="https://github.com/fyshos/fynedesk/raw/develop/desktop-light-current.png" alt="" />
-				<p class="caption light"><br />The standard theme in light variant.</p>
+<h2 class="section-heading">Look and Feel</h2>
+<hr class="light">
+<img src="https://github.com/fyshos/fynedesk/raw/develop/desktop-dark-current.png" alt="" />
+<p class="caption light"><br />The standard theme in its dark look.</p>
+
+<img src="https://github.com/fyshos/fynedesk/raw/develop/desktop-light-current.png" alt="" />
+<p class="caption light"><br />The standard theme in light variant.</p>
 
 You can find more examples on our [themes](/themes/) page.
