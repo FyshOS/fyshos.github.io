@@ -1,0 +1,46 @@
+{{ define "main" }}
+<section class="page-hero">
+  <div class="container">
+    <h1>Theme Gallery</h1>
+    <p>A collection of user-submitted themes showcasing the flexibility of the desktop environment. Custom colours, backgrounds, and fonts make each theme unique.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="theme-grid">
+      <div class="theme-card">
+        <img src="/themes/screenshot/neon.png" alt="Neon Theme">
+        <div class="theme-info">
+          <h3>Neon</h3>
+          <p>Custom colours, background and font</p>
+        </div>
+      </div>
+      <div class="theme-card">
+        <img src="/themes/screenshot/matrix.png" alt="Matrix Theme">
+        <div class="theme-info">
+          <h3>Matrix</h3>
+          <p>Custom colours, background and font</p>
+        </div>
+      </div>
+      <div class="theme-card">
+        <img src="/themes/screenshot/zelda.png" alt="Zelda Theme">
+        <div class="theme-info">
+          <h3>Zelda</h3>
+          <p>Custom colours, background and font</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-banner">
+      <h3>Create Your Own</h3>
+      <p>Themes are easy to build. Submit yours to be featured in the gallery!</p>
+      <a href="{{ .Site.Params.github }}" class="btn btn-primary">Get Started</a>
+    </div>
+  </div>
+</section>
+{{ end }}

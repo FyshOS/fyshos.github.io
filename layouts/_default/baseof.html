@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ .Site.Params.description }}">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  {{ $style := resources.Get "css/main.css" | minify }}
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">
+        <img src="/img/fish_onwhite.png" alt="FyshOS" class="nav-logo">
+        <span>FyshOS</span>
+      </a>
+      <div class="nav-links">
+        {{ range .Site.Menus.main }}
+        <a href="{{ .URL }}" class="nav-link">{{ .Name }}</a>
+        {{ end }}
+        <a href="{{ .Site.Params.isoDownload }}" class="nav-link nav-cta">Download ISO</a>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <p>Maintained by <a href="{{ .Site.Params.github }}">FyshOS</a></p>
+        <p>Built with <a href="https://fyne.io">Fyne</a> &amp; <a href="https://golang.org">Go</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.nav-links').classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

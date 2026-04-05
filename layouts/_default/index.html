@@ -1,0 +1,74 @@
+{{ define "main" }}
+<section class="page-hero">
+  <div class="banner-wrap">
+    <img src="/img/fyshos_banner.png" alt="FyshOS">
+  </div>
+  <div class="container">
+    <h1>FyshOS</h1>
+    <p>A lightweight but attractive Linux OS built with modern tools and the Go language, powered by the Fyne toolkit.</p>
+    <div class="hero-actions">
+      <a href="{{ .Site.Params.isoDownload }}" class="btn btn-primary">Download ISO</a>
+      <a href="/desktop/" class="btn btn-outline">Explore the Desktop</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Built Different</h2>
+      <p>Modern tools for a modern desktop experience</p>
+    </div>
+    <div class="features">
+      <div class="feature-card">
+        <span class="feature-icon">&#9889;</span>
+        <h3>Lightweight &amp; Fast</h3>
+        <p>Built with Go for native performance. No bloated dependencies or heavy runtimes slowing you down.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#127912;</span>
+        <h3>Beautiful by Default</h3>
+        <p>A clean, polished desktop that looks great out of the box. Easily customisable with user themes.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#128295;</span>
+        <h3>Open Source</h3>
+        <p>Entirely open source, built on the <a href="https://fyne.io">Fyne toolkit</a>. Contribute, customise, and make it yours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-banner">
+      <h3>Get Involved</h3>
+      <p>Let's bring fun back to the desktop &mdash; and to cross-platform development!</p>
+      <a href="{{ .Site.Params.github }}" class="btn btn-primary">View on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Screenshots</h2>
+      <p>See FyshOS in action</p>
+    </div>
+    <div class="screenshots">
+      <div class="screenshot">
+        <img src="/img/boot.png" alt="FyshOS Boot Screen">
+        <div class="screenshot-caption">Boot screen</div>
+      </div>
+      <div class="screenshot">
+        <img src="/img/login.png" alt="FyshOS Login Screen">
+        <div class="screenshot-caption">Login screen</div>
+      </div>
+      <div class="screenshot">
+        <img src="/img/desktop.png" alt="FyshOS Desktop">
+        <div class="screenshot-caption">Desktop environment</div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

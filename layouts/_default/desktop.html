@@ -1,0 +1,53 @@
+{{ define "main" }}
+<section class="page-hero">
+  <div class="banner-wrap">
+    <img src="/img/tyde_banner.png" alt="Tyde Desktop Environment">
+  </div>
+  <div class="container">
+    <h1>Tyde Desktop</h1>
+    <p>A fresh take on the Linux desktop experience. Tyde is designed to be simple to use, easy to develop for, and beautiful to look at.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="content-block">
+      <p>Tyde brings a fresh look at desktop environments, focusing on what matters: getting things done while enjoying the experience. Built entirely with the <a href="https://fyne.io">Fyne toolkit</a> and the Go programming language, it's fast, reliable, and easy to extend.</p>
+      <p>As an Open Source project, Tyde welcomes contributions of all kinds. Whether you want to fix bugs, add features, or create beautiful themes, there's a place for you.</p>
+    </div>
+
+    <div class="content-block centered" style="margin-top: 32px;">
+      <a href="{{ .Site.Params.fynedesk }}" class="btn btn-primary">Get Started on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Look &amp; Feel</h2>
+      <p>Available in dark and light variants</p>
+    </div>
+    <div class="screenshots">
+      <div class="screenshot">
+        <img src="/img/desktop-dark-current.png" alt="Tyde Dark Theme">
+        <div class="screenshot-caption">Dark theme &mdash; sleek and easy on the eyes</div>
+      </div>
+      <div class="screenshot">
+        <img src="/img/desktop-light-current.png" alt="Tyde Light Theme">
+        <div class="screenshot-caption">Light theme &mdash; clean and bright</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-banner">
+      <h3>Want more?</h3>
+      <p>Check out the community theme gallery for even more ways to make Tyde your own.</p>
+      <a href="/themes/" class="btn btn-outline">Browse Themes</a>
+    </div>
+  </div>
+</section>
+{{ end }}

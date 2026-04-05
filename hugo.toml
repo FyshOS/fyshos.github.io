@@ -1,0 +1,24 @@
+baseURL = 'https://fyshos.com/'
+languageCode = 'en-us'
+title = 'FyshOS'
+disableKinds = ['taxonomy', 'term']
+
+[params]
+  description = "The Linux OS with a Fyne desktop environment"
+  github = "https://github.com/FyshOS"
+  fynedesk = "https://github.com/fyshos/fynedesk/"
+  isoDownload = "https://github.com/fyshos/fyshos/releases/tag/testing"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Desktop"
+    url = "/desktop/"
+    weight = 2
+  [[menu.main]]
+    name = "Themes"
+    url = "/themes/"
+    weight = 3
