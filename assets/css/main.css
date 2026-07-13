@@ -313,8 +313,13 @@ img {
 
 /* === Desktop / Tyde page === */
 .page-hero {
-  padding: 0 0 60px;
+  padding: 124px 0 60px;
   text-align: center;
+}
+
+/* A banner fills the space behind the fixed navbar, so it needs no offset. */
+.page-hero:has(.banner-wrap) {
+  padding-top: 0;
 }
 
 .page-hero h1 {
@@ -430,6 +435,152 @@ img {
 .theme-card .theme-info p {
   color: var(--text-muted);
   font-size: 0.85rem;
+}
+
+/* === Downloads === */
+.download-section {
+  padding-top: 0;
+}
+
+.download-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.download-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  transition: border-color 0.2s, transform 0.15s;
+}
+
+.download-card:hover {
+  border-color: rgba(77, 208, 225, 0.3);
+  transform: translateY(-2px);
+}
+
+.download-arch {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  background: rgba(77, 208, 225, 0.1);
+  border-radius: 6px;
+  padding: 3px 10px;
+  margin-bottom: 16px;
+}
+
+.download-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.download-detail {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.download-btn {
+  width: 100%;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.download-meta {
+  display: flex;
+  gap: 32px;
+  width: 100%;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.download-meta dt {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+
+.download-meta dd {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.download-file {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  word-break: break-all;
+  line-height: 1.5;
+}
+
+.download-note {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 32px;
+}
+
+/* === Steps === */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.step {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+}
+
+.step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(77, 208, 225, 0.12);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+}
+
+.step h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.step p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.step code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85em;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  padding: 1px 5px;
 }
 
 /* === Blockquote === */

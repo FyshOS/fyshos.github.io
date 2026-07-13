@@ -1,0 +1,137 @@
+{{ define "main" }}
+{{/* The "testing" release is rolling: new ISOs are added to it without a new tag,
+     so pick the newest asset per architecture rather than listing a fixed set. */}}
+{{ $release := dict "assets" slice }}
+{{ with try (resources.GetRemote "https://api.github.com/repos/FyshOS/fyshos/releases/tags/testing") }}
+  {{ with .Err }}
+    {{ warnf "Could not fetch FyshOS releases, falling back to the GitHub link: %s" . }}
+  {{ else with .Value }}
+    {{ $release = . | transform.Unmarshal }}
+  {{ end }}
+{{ end }}
+
+{{ $editions := slice
+  (dict "arch" "amd64" "name" "64-bit PC" "detail" "Intel or AMD x86_64 &mdash; the right choice for most desktops and laptops.")
+  (dict "arch" "arm64" "name" "ARM 64-bit" "detail" "AArch64 machines such as the Raspberry Pi 4 and other ARM boards.")
+  (dict "arch" "i386" "name" "32-bit PC" "detail" "Older x86 hardware that cannot run a 64-bit system.")
+}}
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Download FyshOS</h1>
+    <p>Grab a live ISO and try the Tyde desktop straight from a USB stick &mdash; no installation required. Builds are produced automatically from the latest source.</p>
+  </div>
+</section>
+
+<section class="section download-section">
+  <div class="container">
+    <div class="download-grid">
+      {{ range $edition := $editions }}
+        {{ $matches := slice }}
+        {{ range $release.assets }}
+          {{ if in .name (printf "-%s" $edition.arch) }}
+            {{ $matches = $matches | append . }}
+          {{ end }}
+        {{ end }}
+        {{ $latest := "" }}
+        {{ with $matches }}
+          {{ $latest = index (sort . "created_at" "desc") 0 }}
+        {{ end }}
+
+        <div class="download-card" data-arch="{{ .arch }}">
+          <span class="download-arch">{{ .arch }}</span>
+          <h3>{{ .name }}</h3>
+          <p class="download-detail">{{ .detail | safeHTML }}</p>
+          {{ with $latest }}
+            <a href="{{ .browser_download_url }}" class="btn btn-primary download-btn">Download ISO</a>
+            <dl class="download-meta">
+              <div><dt>Size</dt><dd data-field="size">{{ printf "%.1f GB" (div (float .size) 1073741824) }}</dd></div>
+              <div><dt>Built</dt><dd data-field="date">{{ dateFormat "2 Jan 2006" .created_at }}</dd></div>
+            </dl>
+            <code class="download-file" data-field="name">{{ .name }}</code>
+          {{ else }}
+            <a href="{{ $.Site.Params.isoDownload }}" class="btn btn-outline download-btn">Find on GitHub</a>
+            <p class="download-detail">Build listing unavailable &mdash; see the releases page.</p>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+
+    <p class="download-note">
+      These are rolling test builds &mdash; each one is the latest snapshot of FyshOS for that architecture.
+      You can browse a history of our ISO downloads on the <a href="{{ .Site.Params.isoDownload }}">GitHub releases page</a>.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Getting Started</h2>
+      <p>From download to desktop in three steps</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <h3>Write the ISO to a USB stick</h3>
+        <p>Use a tool such as <a href="https://etcher.balena.io">balenaEtcher</a> or <code>dd</code> to flash the image onto a USB drive of 2 GB or larger. The images are hybrid, so they also work when burned to a DVD.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <h3>Boot from the drive</h3>
+        <p>Restart your computer and choose the USB drive from the boot menu. You may need to disable Secure Boot in your firmware settings first.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <h3>Try it, then install</h3>
+        <p>FyshOS runs live from the USB stick so you can explore the Tyde desktop before committing. When you are happy, run the installer from the desktop to put it on your disk.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-banner">
+      <h3>Something not working?</h3>
+      <p>These builds are under active development. Bug reports and feedback are always welcome.</p>
+      <a href="{{ .Site.Params.github }}/fyshos/issues" class="btn btn-primary">Report an Issue</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // The site is only rebuilt on push, so refresh the build details from the
+  // releases API to keep this page current between deploys.
+  fetch('https://api.github.com/repos/FyshOS/fyshos/releases/tags/testing')
+    .then(function(r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function(release) {
+      document.querySelectorAll('.download-card[data-arch]').forEach(function(card) {
+        var assets = release.assets.filter(function(a) {
+          return a.name.indexOf('-' + card.dataset.arch) !== -1;
+        }).sort(function(a, b) {
+          return new Date(b.created_at) - new Date(a.created_at);
+        });
+        if (!assets.length) return;
+
+        var latest = assets[0];
+        var link = card.querySelector('.download-btn');
+        link.href = latest.browser_download_url;
+        link.textContent = 'Download ISO';
+        link.classList.remove('btn-outline');
+        link.classList.add('btn-primary');
+
+        var set = function(field, value) {
+          var el = card.querySelector('[data-field="' + field + '"]');
+          if (el) el.textContent = value;
+        };
+        set('name', latest.name);
+        set('size', (latest.size / 1073741824).toFixed(1) + ' GB');
+        set('date', new Date(latest.created_at).toLocaleDateString('en-GB', {
+          day: 'numeric', month: 'short', year: 'numeric'
+        }));
+      });
+    })
+    .catch(function() { /* keep the build-time values */ });
+</script>
+{{ end }}
