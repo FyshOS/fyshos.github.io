@@ -21,15 +21,72 @@
 
 html {
   scroll-behavior: smooth;
+  /* The base colour lives here so body::before can paint behind the content. */
+  background: var(--bg);
+  /* The drifting backdrop is transformed, so keep it from widening the page. */
+  overflow-x: clip;
 }
 
 body {
+  position: relative;
   font-family: var(--font);
-  background: var(--bg);
+  background: transparent;
   color: var(--text);
   line-height: 1.7;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
+}
+
+/* === Neon backdrop ===
+ * Anchored to the top of the document (not the viewport) so it fades out as
+ * you scroll away, and masked so the grid dissolves into the flat background.
+ */
+body::before,
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+body::before {
+  height: 1400px;
+  background:
+    radial-gradient(52rem 30rem at 8% -6%, rgba(77, 208, 225, 0.20), transparent 68%),
+    radial-gradient(46rem 28rem at 96% -2%, rgba(108, 132, 255, 0.14), transparent 68%),
+    repeating-linear-gradient(90deg, rgba(77, 208, 225, 0.085) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(0deg, rgba(77, 208, 225, 0.085) 0 1px, transparent 1px 64px);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.5) 42%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.5) 42%, transparent 100%);
+}
+
+/* A slow drifting bloom over the grid, so it reads as lit rather than static. */
+body::after {
+  height: 900px;
+  background:
+    radial-gradient(28rem 18rem at 22% 12%, rgba(77, 208, 225, 0.14), transparent 62%),
+    radial-gradient(24rem 16rem at 78% 4%, rgba(126, 207, 106, 0.07), transparent 62%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, transparent 100%);
+  animation: neon-drift 24s ease-in-out infinite alternate;
+}
+
+@keyframes neon-drift {
+  from {
+    transform: translate3d(-2%, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(2%, 1.5%, 0) scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::after {
+    animation: none;
+  }
 }
 
 a {
@@ -315,7 +372,6 @@ img {
 .page-hero {
   padding: 124px 0 60px;
   text-align: center;
-  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(77, 208, 225, 0.08) 0%, transparent 70%);
 }
 
 .page-hero h1 {
