@@ -19,7 +19,7 @@
 <section class="page-hero">
   <div class="container">
     <h1>Download FyshOS</h1>
-    <p>Grab a live ISO and try the Tyde desktop straight from a USB stick &mdash; no installation required. Builds are produced automatically from the latest source.</p>
+    <p>Grab a live ISO and try the Tyde desktop straight from a USB stick &mdash; no installation required. Builds are produced automatically from the latest source, and <a href="#ferry">Ferry</a> will download and write one for you.</p>
   </div>
 </section>
 
@@ -64,6 +64,46 @@
   </div>
 </section>
 
+<section class="section" id="ferry">
+  <div class="container">
+    <div class="section-header">
+      <h2>Make a USB Stick with Ferry</h2>
+      <p>Our own USB creator for Linux and macOS &mdash; it can even fetch the image for you</p>
+    </div>
+
+    <div class="ferry-panel">
+      <div class="ferry-shot">
+        <img src="/img/ferry.png" alt="Ferry choosing a FyshOS image to write" width="780" height="818" loading="lazy">
+      </div>
+      <div class="ferry-copy">
+        <p>
+          Ferry is a small Fyne application that walks you through four steps &mdash; architecture,
+          image, device, write &mdash; and hands you a bootable stick at the end. It is a Go program,
+          so with Go installed two commands put it in your applications menu.
+        </p>
+
+        <div class="code-block">
+          <span class="code-comment"># get the Fyne tool, then install Ferry</span>
+          <code>go install fyne.io/tools/cmd/fyne@latest</code>
+          <code>fyne install github.com/fyshos/ferry@latest</code>
+        </div>
+
+        <ul class="ferry-points">
+          <li><strong>Downloads the latest build for you</strong> &mdash; matched to the architecture you pick, and cached so a second stick costs no bandwidth. Already have an ISO? Ferry will write that instead.</li>
+          <li><strong>Only shows removable drives</strong> &mdash; your system disk never appears in the list, and the last step spells out the model, path and size before anything is overwritten.</li>
+          <li><strong>Verifies the result</strong> &mdash; the stick is read back and checksummed against the image, so a bad write is reported rather than discovered at boot.</li>
+          <li><strong>Uses the space left over</strong> &mdash; on Linux it can turn the remainder of the stick into an exFAT <code>Data</code> partition that Linux, macOS and Windows can all read.</li>
+        </ul>
+
+        <div class="ferry-actions">
+          <a href="{{ .Site.Params.github }}/ferry" class="btn btn-primary">Ferry on GitHub</a>
+          <a href="https://fyne.io" class="btn btn-outline">About Fyne</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="container">
     <div class="section-header">
@@ -73,13 +113,13 @@
     <div class="steps">
       <div class="step">
         <span class="step-num">1</span>
-        <h3>Write the ISO to a USB stick</h3>
-        <p>Use a tool such as <a href="https://etcher.balena.io">balenaEtcher</a> or <code>dd</code> to flash the image onto a USB drive of 2 GB or larger. The images are hybrid, so they also work when burned to a DVD.</p>
+        <h3>Write the image to a USB stick</h3>
+        <p>Run Ferry, choose the latest build and a drive of 2 GB or larger, and let it write and verify. If you would rather not install anything, <code>dd</code> or <a href="https://etcher.balena.io">balenaEtcher</a> work too &mdash; and the images are hybrid, so they can also be burned to a DVD.</p>
       </div>
       <div class="step">
         <span class="step-num">2</span>
         <h3>Boot from the drive</h3>
-        <p>Restart your computer and choose the USB drive from the boot menu. You may need to disable Secure Boot in your firmware settings first.</p>
+        <p>Plug the stick into the computer, restart it and choose the USB drive from the boot menu. You may need to disable Secure Boot in your firmware settings first.</p>
       </div>
       <div class="step">
         <span class="step-num">3</span>
