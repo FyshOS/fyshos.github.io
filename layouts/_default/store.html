@@ -1,0 +1,105 @@
+{{ define "main" }}
+<section class="page-hero split-hero store-hero">
+  <div class="container">
+    <div class="hero-copy">
+      <h1>FyshOS Store</h1>
+      <p>
+        FyshOS is free and always will be &mdash; but sometimes it is nice to hold
+        something. This is where the physical side of the project lives: sticks you can
+        boot from, swag to wear, and paid software to come.
+      </p>
+      <div class="hero-actions">
+        <a href="#usb-stick" class="btn btn-primary">See what's available</a>
+        <a href="/download/" class="btn btn-outline">Download for Free</a>
+      </div>
+    </div>
+    <div class="box-art">
+      <img src="/img/fyshos_box.png" alt="Retro-style boxed edition of FyshOS" width="1254" height="1254">
+      <p class="box-note">Sadly the boxed edition is artwork rather than a product &mdash; we ship bits, not cardboard.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section store-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Available Now</h2>
+      <p>One item so far, and you have to come and find us</p>
+    </div>
+
+    <div class="product-grid">
+      <div class="product-card wide" id="usb-stick">
+        <div class="product-shot">
+          <img src="/img/usb_stick.jpg" alt="Orange FyshOS branded USB stick" width="1722" height="759" loading="lazy">
+        </div>
+        <div class="product-body">
+          <div class="product-head">
+            <h3>FyshOS USB Stick</h3>
+            <span class="product-price">&pound;5 <span class="price-alt">/ $5 / &euro;5</span></span>
+          </div>
+          <p>
+            A branded USB stick with FyshOS already on it. Plug it into a computer, pick it
+            from the boot menu and you are running the Tyde desktop &mdash; nothing to write,
+            nothing to install.
+          </p>
+          <p class="product-availability">
+            <span class="product-badge">In person only</span>
+            Sold at GopherCon events, where you can pay in pounds, dollars or euros. We are
+            not set up for shipping yet, so there is no way to order one online.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <p class="store-note">
+      Going to a GopherCon? Come and say hello &mdash; sticks are limited to what fits in the bag.
+      If you cannot make it to an event, the same image is a
+      <a href="/download/">free download</a>, and <a href="/download/#ferry">Ferry</a> will write
+      it to a stick of your own.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Coming Soon</h2>
+      <p>Things we would like to sell you, once they exist</p>
+    </div>
+
+    <div class="product-grid soon-grid">
+      <div class="product-card soon">
+        <div class="product-body">
+          <span class="product-badge">Planned</span>
+          <h3>Swag</h3>
+          <p>T-shirts, stickers and the rest &mdash; the fysh looks good on more than a boot screen.</p>
+        </div>
+      </div>
+      <div class="product-card soon">
+        <div class="product-body">
+          <span class="product-badge">Planned</span>
+          <h3>Software</h3>
+          <p>Paid applications for FyshOS and other Fyne desktops, sold to help fund the project.</p>
+        </div>
+      </div>
+      <div class="product-card soon">
+        <div class="product-body">
+          <span class="product-badge">Planned</span>
+          <h3>Online Ordering</h3>
+          <p>Postage and a checkout, so a stick can reach you without a conference ticket.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-banner">
+      <h3>Want something we don't sell?</h3>
+      <p>Tell us what you would like to see in the store &mdash; it is early days and the shelves are mostly empty.</p>
+      <a href="{{ .Site.Params.github }}/fyshos/issues" class="btn btn-primary">Suggest an Item</a>
+    </div>
+  </div>
+</section>
+{{ end }}

@@ -22,3 +22,7 @@ disableKinds = ['taxonomy', 'term']
     name = "Themes"
     url = "/themes/"
     weight = 3
+  [[menu.main]]
+    name = "Store"
+    url = "/store/"
+    weight = 4
