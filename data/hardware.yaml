@@ -1,0 +1,115 @@
+# Hardware compatibility matrix rendered by layouts/_default/compatibility.html.
+#
+# Each device lists a state per feature id below. Valid states are:
+#   full      the feature works out of the box
+#   partial   it works, but needs a step that is not part of a normal install
+#   none      it does not work
+#   na        the hardware is not present on this machine
+#   untested  nobody has reported either way (also the default when omitted)
+#
+# Notes are rendered as HTML, so links are fine.
+
+features:
+  - id: graphics
+    name: Graphics and display
+    short: Graphics
+  - id: audio
+    name: Audio in and out
+    short: Audio
+  - id: power
+    name: Battery reporting, suspend and resume
+    short: Battery
+  - id: input
+    name: Keyboard and trackpad, including function keys
+    short: Keyboard
+  - id: wifi
+    name: Wi-Fi
+    short: Wi-Fi
+  - id: camera
+    name: Webcam
+    short: Camera
+  - id: fingerprint
+    name: Fingerprint reader
+    short: Fingerprint
+  - id: touchscreen
+    name: Touchscreen and pen
+    short: Touch
+
+devices:
+  - id: thinkpad-x1
+    name: Lenovo ThinkPad X1
+    model: Carbon Gen 13
+    verdict: full
+    summary: >-
+      Everything we have tried works from the live image onwards, fingerprint
+      reader included. This is the machine FyshOS is developed on day to day.
+    support:
+      wifi: full
+      graphics: full
+      audio: full
+      power: full
+      input: full
+      camera: full
+      fingerprint: full
+      touchscreen: na
+    notes:
+      - The fingerprint reader is picked up during installation and can be used
+        to unlock the session as well as to log in after fingerprint enrolled.
+
+  - id: dell-xps
+    name: Dell XPS
+    model: XPS 13 9300
+    verdict: full
+    summary: >-
+      An older machine with no known problems &mdash; wireless, sound, power
+      management and the touch screen all come up on a stock install.
+    support:
+      wifi: full
+      graphics: full
+      audio: full
+      power: full
+      input: full
+      camera: full
+      fingerprint: na
+      touchscreen: full
+    notes:
+      - No firmware or driver steps are needed after installation; the machine
+        is usable straight from the first boot.
+
+  - id: surface-pro
+    name: Microsoft Surface Pro
+    model: 7+ Core i5
+    verdict: partial
+    summary: >-
+      Boots and installs on the stock FyshOS kernel and is usable as a laptop.
+      The camera does not work, and the touchscreen needs a different kernel.
+    support:
+      wifi: full
+      graphics: full
+      audio: full
+      power: full
+      input: full
+      camera: none
+      fingerprint: na
+      touchscreen: partial
+    notes:
+      - >-
+        <strong>Touchscreen and pen</strong> need the
+        <a href="https://github.com/linux-surface/linux-surface">linux-surface</a>
+        kernel, which is not what FyshOS ships. Adding their Debian repository and
+        installing <code>linux-image-surface</code>, <code>linux-headers-surface</code>,
+        <code>libwacom-surface</code> and <code>iptsd</code> brings touch to life.
+      - >-
+        <strong>The camera does not work.</strong> Everything else on this list
+        runs on the kernel that ships with FyshOS.
+      - >-
+        There is no fingerprint reader on the tablet itself &mdash; it is a Type
+        Cover option rather than built-in hardware.
+      - >-
+        Installing alongside Windows needs manual partitioning, and the firmware
+        boot order has to be changed afterwards. The
+        <a href="https://andy.xyz/2026/08/20/running-the-fyshos-desktop-on-surface-pro/">full write-up</a>
+        covers both, step by step.
+    link:
+      url: https://andy.xyz/2026/08/20/running-the-fyshos-desktop-on-surface-pro/
+      text: Read the Surface Pro walkthrough

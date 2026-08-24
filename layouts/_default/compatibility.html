@@ -1,0 +1,120 @@
+{{ define "main" }}
+{{/* Devices and their per-feature states live in data/hardware.yaml so that
+     new machines can be added without touching this template. */}}
+{{ $hw := .Site.Data.hardware }}
+{{ $states := dict
+  "full"     (dict "class" "ok"      "sym" "&check;" "label" "Works out of the box")
+  "partial"  (dict "class" "partial" "sym" "!"       "label" "Works, with a setup step")
+  "none"     (dict "class" "no"      "sym" "&times;" "label" "Not working")
+  "na"       (dict "class" "na"      "sym" "&ndash;" "label" "Hardware not present")
+  "untested" (dict "class" "unknown" "sym" "?"       "label" "Not tested yet")
+}}
+{{ $verdicts := dict
+  "full"     "Fully supported"
+  "partial"  "Mostly supported"
+  "none"     "Not supported"
+  "untested" "Testing wanted"
+}}
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Hardware Compatibility</h1>
+    <p>What we have actually booted FyshOS on, and what worked when we did. Every entry below comes from a real machine rather than a driver list &mdash; if something is missing from the table, nobody has reported it yet.</p>
+  </div>
+</section>
+
+<section class="section compat-section">
+  <div class="container">
+    <div class="compat-legend">
+      {{ range $key := slice "full" "partial" "none" "na" "untested" }}
+        {{ $state := index $states $key }}
+        <span class="compat-legend-item">
+          <span class="compat-state is-{{ $state.class }}" aria-hidden="true">{{ $state.sym | safeHTML }}</span>
+          {{ $state.label }}
+        </span>
+      {{ end }}
+    </div>
+
+    <div class="compat-scroll">
+      <table class="compat-table">
+        <caption class="visually-hidden">Support for each system feature on every tested machine</caption>
+        <thead>
+          <tr>
+            <th scope="col">Machine</th>
+            {{ range $hw.features }}
+              <th scope="col"><abbr title="{{ .name }}">{{ .short }}</abbr></th>
+            {{ end }}
+          </tr>
+        </thead>
+        <tbody>
+          {{ range $device := $hw.devices }}
+            <tr>
+              <th scope="row">
+                <a href="#{{ $device.id }}">{{ $device.name }}</a>
+                {{ with $device.model }}<span class="compat-model">{{ . }}</span>{{ end }}
+              </th>
+              {{ range $feature := $hw.features }}
+                {{ $key := default "untested" (index $device.support $feature.id) }}
+                {{ $state := index $states $key }}
+                <td>
+                  <span class="compat-state is-{{ $state.class }}" aria-hidden="true">{{ $state.sym | safeHTML }}</span>
+                  <span class="visually-hidden">{{ $feature.name }}: {{ $state.label }}</span>
+                </td>
+              {{ end }}
+            </tr>
+          {{ end }}
+        </tbody>
+      </table>
+    </div>
+
+    <p class="compat-note">
+      A machine that is not listed is not a machine we expect to fail &mdash; FyshOS is
+      Debian based, so hardware with mainline Linux drivers generally just works. These
+      are simply the ones we can vouch for.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>The Detail</h2>
+      <p>Notes and caveats for each machine we have tested</p>
+    </div>
+
+    <div class="device-list">
+      {{ range $device := $hw.devices }}
+        {{ $verdict := index $states $device.verdict }}
+        <article class="device-card" id="{{ $device.id }}">
+          <div class="device-head">
+            <div class="device-title">
+              <h3>{{ $device.name }}</h3>
+              {{ with $device.model }}<p class="device-model">{{ . }}</p>{{ end }}
+            </div>
+            <span class="device-verdict is-{{ $verdict.class }}">{{ index $verdicts $device.verdict }}</span>
+          </div>
+          <p class="device-summary">{{ $device.summary | safeHTML }}</p>
+          {{ with $device.notes }}
+            <ul class="device-notes">
+              {{ range . }}<li>{{ . | safeHTML }}</li>{{ end }}
+            </ul>
+          {{ end }}
+          {{ with $device.link }}
+            <a href="{{ .url }}" class="btn btn-outline device-link">{{ .text }}</a>
+          {{ end }}
+        </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-banner">
+      <h3>Tried FyshOS on something else?</h3>
+      <p>Tell us what you booted and what did or did not work &mdash; good reports and bad are equally useful, and both end up on this page.</p>
+      <a href="{{ .Site.Params.github }}/fyshos/issues" class="btn btn-primary">Report Your Hardware</a>
+    </div>
+  </div>
+</section>
+{{ end }}

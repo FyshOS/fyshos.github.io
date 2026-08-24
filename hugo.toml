@@ -26,3 +26,7 @@ disableKinds = ['taxonomy', 'term']
     name = "Store"
     url = "/store/"
     weight = 4
+  [[menu.main]]
+    name = "Compatibility"
+    url = "/compatibility/"
+    weight = 5

@@ -14,6 +14,8 @@
   --accent: #4dd0e1;
   --accent-hover: #6be0ef;
   --green: #7ecf6a;
+  --amber: #e3b23c;
+  --red: #e2685c;
   --border: #2a2d3e;
   --radius: 12px;
   --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -969,6 +971,286 @@ img {
 
   .product-card.wide .product-shot {
     flex: none;
+  }
+}
+
+
+/* === Compatibility matrix === */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.compat-section {
+  padding-top: 40px;
+}
+
+.compat-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 24px;
+  margin-bottom: 32px;
+}
+
+.compat-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* The state marker doubles as the legend swatch, so it carries its own colour
+ * rather than inheriting from the cell. */
+.compat-state {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1;
+  border: 1px solid transparent;
+}
+
+.compat-state.is-ok {
+  background: rgba(126, 207, 106, 0.14);
+  border-color: rgba(126, 207, 106, 0.4);
+  color: var(--green);
+}
+
+.compat-state.is-partial {
+  background: rgba(227, 178, 60, 0.14);
+  border-color: rgba(227, 178, 60, 0.4);
+  color: var(--amber);
+}
+
+.compat-state.is-no {
+  background: rgba(226, 104, 92, 0.14);
+  border-color: rgba(226, 104, 92, 0.4);
+  color: var(--red);
+}
+
+.compat-state.is-na,
+.compat-state.is-unknown {
+  background: rgba(148, 152, 176, 0.1);
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+/* The table is wider than a phone, so it scrolls inside its own box instead of
+ * pushing the page sideways. */
+.compat-scroll {
+  overflow-x: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.compat-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+
+.compat-table th,
+.compat-table td {
+  padding: 14px 12px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.compat-table thead th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.compat-table thead th abbr {
+  text-decoration: none;
+  border-bottom: 1px dotted var(--border);
+  cursor: help;
+}
+
+.compat-table tbody th {
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.compat-model {
+  display: block;
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* Pin the machine name so it stays readable while the feature columns are
+ * scrolled sideways on narrow screens. */
+.compat-table thead th:first-child,
+.compat-table tbody th {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  text-align: left;
+  padding-left: 20px;
+  background: var(--bg-card);
+  border-right: 1px solid var(--border);
+}
+
+.compat-table tbody tr:last-child th,
+.compat-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.compat-table tbody tr:hover td {
+  background: rgba(77, 208, 225, 0.04);
+}
+
+/* The pinned cell is opaque, so tint it directly rather than through the row. */
+.compat-table tbody tr:hover th {
+  background: #232637;
+}
+
+.compat-note {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+  max-width: 640px;
+  margin: 24px auto 0;
+}
+
+/* === Device detail cards === */
+.device-list {
+  display: grid;
+  gap: 24px;
+}
+
+.device-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  scroll-margin-top: 88px;
+}
+
+.device-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.device-card h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.device-model {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+.device-verdict {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.device-verdict.is-ok {
+  background: rgba(126, 207, 106, 0.12);
+  border-color: rgba(126, 207, 106, 0.35);
+  color: var(--green);
+}
+
+.device-verdict.is-partial {
+  background: rgba(227, 178, 60, 0.12);
+  border-color: rgba(227, 178, 60, 0.35);
+  color: var(--amber);
+}
+
+.device-verdict.is-no {
+  background: rgba(226, 104, 92, 0.12);
+  border-color: rgba(226, 104, 92, 0.35);
+  color: var(--red);
+}
+
+.device-verdict.is-na,
+.device-verdict.is-unknown {
+  background: rgba(148, 152, 176, 0.1);
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+.device-summary {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.device-notes {
+  list-style: none;
+  margin-top: 16px;
+}
+
+.device-notes li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 10px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.device-notes li::before {
+  content: "\2022";
+  position: absolute;
+  left: 4px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.device-notes strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.device-notes code {
+  background: rgba(77, 208, 225, 0.1);
+  color: var(--accent);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+.device-link {
+  margin-top: 8px;
+}
+
+@media (max-width: 600px) {
+  .device-card {
+    padding: 24px 20px;
   }
 }
 
