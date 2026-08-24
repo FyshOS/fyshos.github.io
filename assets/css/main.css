@@ -515,6 +515,18 @@ img {
   gap: 24px;
 }
 
+/* The bundled previews are wider than the community desktop shots, so they get
+ * a row of their own rather than sharing a grid track with them. */
+.theme-pair {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 720px) {
+  .theme-pair {
+    grid-template-columns: 1fr;
+  }
+}
+
 .theme-card {
   border-radius: var(--radius);
   overflow: hidden;
