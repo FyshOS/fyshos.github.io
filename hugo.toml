@@ -27,6 +27,10 @@ disableKinds = ['taxonomy', 'term']
     url = "/store/"
     weight = 4
   [[menu.main]]
+    name = "Packages"
+    url = "https://packages.fyshos.com/packages/"
+    weight = 5
+  [[menu.main]]
     name = "Compatibility"
     url = "/compatibility/"
-    weight = 5
+    weight = 6
